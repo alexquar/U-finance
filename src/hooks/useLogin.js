@@ -1,37 +1,38 @@
-import { useState, useEffect } from "react"
-import { projectAuth } from "../firebase/config"
-import { useAuthContext } from "./useAuthContext"
+import { useState, useEffect } from 'react'
+import { projectAuth } from '../firebase/config'
+import { useAuthContext } from './useAuthContext'
+
 export const useLogin = () => {
-    const [error, setError] = useState(null)
-    const [isPending, setIsPending] = useState(false)
-    const {dispatch} = useAuthContext()
-    const [isCancelled, setIsCancelled] = useState('false')
+  const [isCancelled, setIsCancelled] = useState(false)
+  const [error, setError] = useState(null)
+  const [isPending, setIsPending] = useState(false)
+  const { dispatch } = useAuthContext()
 
-    const login = async (email, password) => {
+  const login = async (email, password) => {
+    setError(null)
+    setIsPending(true)
+  
+    try {
+      // login
+      const res = await projectAuth.signInWithEmailAndPassword(email, password)
+
+      // dispatch login action
+      dispatch({ type: 'LOGIN', payload: res.user })
+
+        setIsPending(false)
         setError(null)
-        setIsPending(true)
-        try {
-          const res = await  projectAuth.signInWithEmailAndPassword(email, password)
-            if(!res){
-                throw new Error('Could not signup')
-            }
-            dispatch({type: 'LOGIN', payload : res.user})
-            if(!isCancelled){
-                setIsPending(false)
-                setError(null)
-                }
-        } catch(err) {
-            if(!isCancelled){
-                console.log(err.message)
-                setIsPending(false)
-                setError(err.message)
-                }
-        }
+    } 
+    catch(err) {
+      if (!isCancelled) {
+        setError(err.message)
+        setIsPending(false)
+      }
     }
+  }
 
-    useEffect(()=>{
-        return () => setIsCancelled(true)
-    }, [])
+  useEffect(() => {
+    return () => setIsCancelled(true)
+  }, [])
 
-    return {login, error, isPending}
+  return { login, isPending, error }
 }
