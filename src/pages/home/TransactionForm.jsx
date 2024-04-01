@@ -19,7 +19,7 @@ setAmount('')
 
   return (
     <div>
-      <h3>
+      <h4>
         <form onSubmit={handleSubmit}>
             <label>
                 <span>Transaction Name:</span>
@@ -31,7 +31,7 @@ setAmount('')
             </label>
             <button>Submit</button>
         </form>
-      </h3>
+      </h4>
     </div>
   )
 }
