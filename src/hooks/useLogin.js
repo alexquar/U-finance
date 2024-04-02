@@ -23,10 +23,8 @@ export const useLogin = () => {
         setError(null)
     } 
     catch(err) {
-      if (!isCancelled) {
-        setError(err.message)
+        setError("Incorrect password or email...")
         setIsPending(false)
-      }
     }
   }
 
