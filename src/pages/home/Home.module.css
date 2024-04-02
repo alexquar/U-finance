@@ -71,7 +71,7 @@
     border-left: 4px solid #F87060;
   }
   .transactions .name {
-    color: #CDD7D6;
+    color: #102542;
     font-size: 1.4em;
   }
   .transactions .amount {
@@ -85,8 +85,8 @@
     position: absolute;
     top: 0;
     right:0;
-    background: #ddd;
-    color: #777;
+    background: #CDD7D6;
+    color: #F87060;
     border: none;
     padding: 12px 8px;
     text-align: center;

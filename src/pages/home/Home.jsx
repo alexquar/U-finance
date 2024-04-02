@@ -11,7 +11,7 @@ export default function Home() {
       <div className={styles.context}>
         {error && <p>{error}</p>}
         {documents && <TransactionList transactions={documents} />}
-        {documents && !documents.length && <p>No transaction to display...</p>}
+        {documents && !documents.length && <p>No transactions to display...</p>}
       </div>
       <div className={styles.sidebar}>
         <h3>Add a Transaction:</h3>
